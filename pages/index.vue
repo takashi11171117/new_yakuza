@@ -1,72 +1,46 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        new_yakuza
-      </h1>
-      <h2 class="subtitle">
-        My flawless Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+    <div class="menu box" @wheel="zoom" >
+        <div class="aaaa">
+            <SlideMenu :scrollY="scrollY">
+                <div class="menu-item">Schedule</div>
+                <div class="menu-item">Contact</div>
+                <div class="menu-item">Movie</div>
+                <div class="menu-item">Sound</div>
+            </SlideMenu>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import {TweenMax, Expo, Elastic} from 'gsap'
+import SlideMenu from '../components/SlideMenu';
 
 export default {
-  components: {
-    Logo
-  }
+    data() {
+        return {
+            scrollY: 0
+        }
+    }, 
+    components: {
+      SlideMenu
+    },
+    mounted () {
+    },
+    methods: {
+        zoom (e) {
+            this.scrollY += e.deltaY
+        }
+    }
 }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+<style lang="sass" scoped>
+    .menu-item
+        font-size: 100px
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
+    .box
+        width: 100vw
+        height: 100vh
+        position: fixed
+        top: 0
 </style>

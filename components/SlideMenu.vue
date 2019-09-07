@@ -1,9 +1,8 @@
 <template>
-    <div class="vifnslb-container" :style="customStyle">
-        <div class="vifnslb-bar">aaaa</div>
-        <div class="vifnslb-bar">bbb</div>
-        <div class="vifnslb-bar">ccc</div>
-        <div class="vifnslb-bar">dd</div>
+    <div class="vifnslb-container" :style="customStyle">  
+      <slot>
+        こんにちは 世界
+      </slot>
     </div>
 </template>
 <script>
@@ -21,7 +20,6 @@ export default {
   },
   watch: {
         scrollY: function(val) {
-            console.log(this.customStyle);
             this.customStyle = {
                 transform: `translateY(${val}px)`
             }

@@ -2,10 +2,7 @@
     <div class="menu box" @wheel="zoom" >
         <div class="aaaa">
             <SlideMenu :scrollY="scrollY">
-                <div class="menu-item">Schedule</div>
-                <div class="menu-item">Contact</div>
-                <div class="menu-item">Movie</div>
-                <div class="menu-item">Sound</div>
+                <SlideMenuList />
             </SlideMenu>
         </div>
     </div>
@@ -14,6 +11,7 @@
 <script>
 import {TweenMax, Expo, Elastic} from 'gsap'
 import SlideMenu from '../components/SlideMenu';
+import SlideMenuList from '../components/SlideMenuList';
 
 export default {
     data() {
@@ -22,7 +20,8 @@ export default {
         }
     }, 
     components: {
-      SlideMenu
+      SlideMenu,
+      SlideMenuList
     },
     mounted () {
     },

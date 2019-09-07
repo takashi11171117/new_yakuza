@@ -33,6 +33,10 @@ export default {
       src: '~/plugins/scrollmagic',
       mode: 'client'
     },
+    {
+      src: '~/plugins/v-observe-visibility.js',
+      mode: 'client'
+    },
   ],
   /*
   ** Nuxt.js dev-modules

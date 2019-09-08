@@ -1,47 +1,38 @@
-<template>
-    <div>
-        <div @wheel="scroll" v-for="(item, index) in list" :key="index">
-            <intersect @enter="scrollBefore"><p></p></intersect>
-            <p>{{contents[item]}}</p>
-            <intersect @enter="scrollAfter"><p></p></intersect>
-        </div>
-    </div>
-</template>
 <script>
-import Intersect from 'vue-intersect'
-
 export default {
   name: 'SlideMenuList',
+  props: {
+      direction : Number
+  },
   data () {
-      return {
-          contents: ['aaaa', 'bbbb', 'ccccc', 'ddddd'],
-          list: [0],
-          scrollDirection: 0,
-      }
+    return {
+        customStyle: {
+            marginTop: 0,
+        }
+    }
   },
   components: {
-    Intersect
+  },
+  mounted () {
+   this.matchHeight()
   },
   methods: {
-      scrollBefore () {
-          if (this.scrollDirection === 0) {
-            let first = this.list[0];
-            this.list.unshift((first + 3) % 4);
-          }
-      },
-      scrollAfter () {
-          if (this.scrollDirection === 1) {
-            let last = this.list.slice(-1)[0];
-            this.list.push((last + 1) % 4);
-          }
-      },
-      scroll (e) {
-          if (e.deltaY > 0) {
-            this.scrollDirection = 1;
-          } else {
-            this.scrollDirection = 0;
-          }
+    matchHeight () {
+      let height = this.$refs.container.clientHeight;
+      console.log(-height/2);
+      this.customStyle = {
+            marginTop: -height/2 + 'px',
       }
+    }
+  },
+  render (createElement) {
+    const bar = createElement('div', { class: 'bar' }, this.$slots.default)
+    return createElement('div', { class: ['container'], style: this.customStyle, ref: ['container'] }, [bar, bar, bar, bar, bar])
   }
 }
 </script>
+<style lang="sass" scoped>
+.container
+    position: absolute;
+    top: 50%;
+</style>

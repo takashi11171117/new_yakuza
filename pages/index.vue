@@ -2,7 +2,12 @@
     <div class="menu box" @wheel="zoom" >
         <div class="aaaa">
             <SlideMenu :scrollY="scrollY">
-                <SlideMenuList />
+                <SlideMenuList :direction="direction">
+                    <p style="font-size: 90px;">あああああああ</p>
+                    <p style="font-size: 90px;">いいいいいいい</p>
+                    <p style="font-size: 90px;">ううううううう</p>
+                    <p style="font-size: 90px;">えええ</p>
+                </SlideMenuList>
             </SlideMenu>
         </div>
     </div>
@@ -16,7 +21,8 @@ import SlideMenuList from '../components/SlideMenuList';
 export default {
     data() {
         return {
-            scrollY: 0
+            scrollY: 0,
+            direction: 0
         }
     }, 
     components: {
@@ -27,7 +33,12 @@ export default {
     },
     methods: {
         zoom (e) {
-            this.scrollY += e.deltaY
+            if (e.deltaY > 0) {
+                this.direction = 1;
+            } else {
+                this.direction = 0;
+            }
+            this.scrollY += e.deltaY;
         }
     }
 }

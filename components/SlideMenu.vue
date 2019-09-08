@@ -31,8 +31,6 @@ export default {
 <style scoped lang="sass">
 .vifnslb-container
   position: relative;
-  overflow: hidden;
-  height: max-content;
   min-width: 200%;
   
 .vifnslb-bar

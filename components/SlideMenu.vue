@@ -1,15 +1,24 @@
 <template>
-    <div class="vifnslb-container" :style="customStyle">  
-      <slot>
-        こんにちは 世界
-      </slot>
+    <div :style="customStyle">  
+      <SlideMenuList :direction="direction" :scrollY="scrollY">
+        <p style="font-size: 90px;">あああああああ</p>
+        <p style="font-size: 90px;">いいいいいいい</p>
+        <p style="font-size: 90px;">ううううううう</p>
+        <p style="font-size: 90px;">えええ</p>
+      </SlideMenuList>
     </div>
 </template>
 <script>
+import SlideMenuList from '../components/SlideMenuList';
+
 export default {
   name: 'SlideMenu',
   props: {
-      scrollY: Number
+      scrollY: Number,
+      direction: Number
+  },
+  components: {
+    SlideMenuList
   },
   data() {
     return {
@@ -29,10 +38,4 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.vifnslb-container
-  position: relative;
-  min-width: 200%;
-  
-.vifnslb-bar
-  width: 50%;
 </style>

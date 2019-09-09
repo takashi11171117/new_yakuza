@@ -1,14 +1,7 @@
 <template>
     <div class="menu box" @wheel="zoom" >
         <div class="aaaa">
-            <SlideMenu :scrollY="scrollY">
-                <SlideMenuList :direction="direction">
-                    <p style="font-size: 90px;">あああああああ</p>
-                    <p style="font-size: 90px;">いいいいいいい</p>
-                    <p style="font-size: 90px;">ううううううう</p>
-                    <p style="font-size: 90px;">えええ</p>
-                </SlideMenuList>
-            </SlideMenu>
+            <SlideMenu :scrollY="scrollY" :direction="direction" />
         </div>
     </div>
 </template>
@@ -16,7 +9,7 @@
 <script>
 import {TweenMax, Expo, Elastic} from 'gsap'
 import SlideMenu from '../components/SlideMenu';
-import SlideMenuList from '../components/SlideMenuList';
+import _ from 'lodash';
 
 export default {
     data() {
@@ -27,18 +20,28 @@ export default {
     }, 
     components: {
       SlideMenu,
-      SlideMenuList
     },
     mounted () {
     },
     methods: {
         zoom (e) {
-            if (e.deltaY > 0) {
-                this.direction = 1;
-            } else {
-                this.direction = 0;
-            }
-            this.scrollY += e.deltaY;
+                if (e.deltaY > 0) {
+                    this.direction = 1;
+                } else {
+                    this.direction = 0;
+                }
+
+                let delta = 0;
+
+                if (e.deltaY > 60) {
+                    delta = 60;
+                } else if (e.deltaY < -60) {
+                    delta = -60;
+                } else {
+                    delta = e.deltaY;
+                }
+
+                this.scrollY += delta * .9;
         }
     }
 }

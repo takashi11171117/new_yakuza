@@ -1,5 +1,6 @@
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
   name: 'SlideMenuList',
   props: {
       direction : Number,
@@ -20,9 +21,9 @@ export default {
   },
   methods: {
     matchHeight () {
-      const height = this.$refs.container.clientHeight;
-      this.heightBar = this.$refs.bar.clientHeight;
-      this.mt = -height/2;
+      const height = this.$refs.container.clientHeight
+      this.heightBar = this.$refs.bar.clientHeight
+      this.mt = -height/2
       this.customStyle = {
         marginTop: this.mt + 'px',
       }
@@ -34,11 +35,11 @@ export default {
   },
   watch: {
         scrollY: function(val) {
-            const scrollAmount = Math.abs(parseInt(val));
-            const perAmount = scrollAmount%this.heightBar;
-            const threshold = 40;
-            const minLimit = threshold;
-            const maxLimit = this.heightBar - threshold;
+            const scrollAmount = Math.abs(parseInt(val))
+            const perAmount = scrollAmount%this.heightBar
+            const threshold = 40
+            const minLimit = threshold
+            const maxLimit = this.heightBar - threshold
             if (perAmount < minLimit || perAmount > maxLimit) {
                 if (this.scrollFlg === 0) {
                     if (this.direction === 0) {
@@ -53,16 +54,16 @@ export default {
                         }
                     }
                 }
-                this.scrollFlg = 1;
+                this.scrollFlg = 1
             } else if (perAmount >= minLimit || perAmount <= maxLimit) {
-                this.scrollFlg = 0;
+                this.scrollFlg = 0
             }
         }
   }
-}
+})
 </script>
 <style lang="sass" scoped>
 .container
-    position: absolute;
-    top: 50%;
+    position: absolute
+    top: 50%
 </style>

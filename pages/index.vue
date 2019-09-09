@@ -6,12 +6,13 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import {TweenMax, Expo, Elastic} from 'gsap'
-import SlideMenu from '../components/SlideMenu';
-import _ from 'lodash';
+import SlideMenu from '../components/SlideMenu'
+import _ from 'lodash'
 
-export default {
+export default Vue.extend({
     data() {
         return {
             scrollY: 0,
@@ -44,7 +45,7 @@ export default {
                 this.scrollY += delta * .9;
         }
     }
-}
+})
 </script>
 
 <style lang="sass" scoped>

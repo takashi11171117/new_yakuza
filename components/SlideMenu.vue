@@ -8,10 +8,11 @@
       </SlideMenuList>
     </div>
 </template>
-<script>
-import SlideMenuList from '../components/SlideMenuList';
+<script lang="ts">
+import Vue from 'vue'
+import SlideMenuList from '../components/SlideMenuList'
 
-export default {
+export default Vue.extend({
   name: 'SlideMenu',
   props: {
       scrollY: Number,
@@ -34,7 +35,7 @@ export default {
             }
         }
   }
-}
+})
 </script>
 
 <style scoped lang="sass">

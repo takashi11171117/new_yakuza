@@ -1,10 +1,7 @@
-import NuxtConfiguration from '@nuxt/config'
+import { Configuration } from '@nuxt/types'
 
-const nuxtConfig: NuxtConfiguration = {
+const config: Configuration = {
   mode: 'spa',
-  /*
-  ** Headers of the page
-  */
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -16,49 +13,40 @@ const nuxtConfig: NuxtConfiguration = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  /*
-  ** Customize the progress-bar color
-  */
   loading: { color: '#fff' },
-  /*
-  ** Global CSS
-  */
   css: [
   ],
-  /*
-  ** Plugins to load before mounting the App
-  */
   plugins: [
-    '~plugins/util',
   ],
-  /*
-  ** Nuxt.js dev-modules
-  */
-  devModules: [
+  buildModules: [
+    '@nuxtjs/eslint-module',
+    '@nuxt/typescript-build'
   ],
-  /*
-  ** Nuxt.js modules
-  */
   modules: [
+    '@nuxtjs/axios'
   ],
-  /*
-  ** Build configuration
-  */
+  axios: {
+  },
   build: {
-    /*
-    ** You can extend webpack config here
-    */
-    extend(config, ctx) {
-        if (ctx.isDev && ctx.isClient) {
-          if (!config.module) return  // undefinedの場合、pushせずにreturnするように追加
-          config.module.rules.push({
-            enforce: 'pre',
-            test: /\.(js|vue)$/,
-            loader: 'eslint-loader',
-            exclude: /(node_modules)/
-          })
-        }
+    extend (config: any, ctx: any) {
+      if (ctx.isDev && ctx.isClient) {
+        if (!config.module) { return } // undefinedの場合、pushせずにreturnするように追加
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
       }
+    }
+  },
+  typescript: {
+    typeCheck: true,
+    ignoreNotFoundWarnings: true
+  },
+  sassOptions: {
+    indentedSyntax: true
   }
 }
-export default nuxtConfig
+
+export default config

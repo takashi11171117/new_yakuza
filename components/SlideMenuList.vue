@@ -1,66 +1,83 @@
+<template>
+  <div ref="container" class="container" :style="customStyle">
+    <div ref="bar" class="bar">
+      <slot />
+    </div>
+    <div ref="bar" class="bar">
+      <slot />
+    </div>
+    <div ref="bar" class="bar">
+      <slot />
+    </div>
+    <div ref="bar" class="bar">
+      <slot />
+    </div>
+    <div ref="bar" class="bar">
+      <slot />
+    </div>
+  </div>
+</template>
+
 <script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({
-  name: 'SlideMenuList',
-  props: {
-      direction : Number,
-      scrollY: Number
-  },
-  data () {
-    return {
-        customStyle: {
-            marginTop: 0,
-        },
-        scrollFlg: 0,
-        heightBar: 0,
-        mt: 0,
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
+
+@Component({})
+export default class SlideMenuList extends Vue {
+    @Prop()
+    direction = 0;
+
+    @Prop()
+    scrollY = 0;
+
+    private customStyle: Object = {
+      marginTop: 0
     }
-  },
-  mounted () {
-   this.matchHeight()
-  },
-  methods: {
-    matchHeight () {
-      const height = this.$refs.container.clientHeight
-      this.heightBar = this.$refs.bar.clientHeight
-      this.mt = -height/2
+    private scrollFlg = 0
+    private heightBar = 0
+    private mt = 0
+
+    mounted () {
+      this.matchHeight()
+    }
+
+    public matchHeight () {
+      const containerRef: any = this.$refs.container
+      const height = containerRef.clientHeight
+      const barRef: any = this.$refs.bar
+      this.heightBar = barRef.clientHeight
+      this.mt = -height / 2
       this.customStyle = {
-        marginTop: this.mt + 'px',
+        marginTop: this.mt + 'px'
       }
     }
-  },
-  render (createElement) {
-    const bar = createElement('div', { class: 'bar', ref: 'bar' }, this.$slots.default)
-    return createElement('div', { class: ['container'], style: this.customStyle, ref: ['container'] }, [bar, bar, bar, bar, bar])
-  },
-  watch: {
-        scrollY: function(val) {
-            const scrollAmount = Math.abs(parseInt(val))
-            const perAmount = scrollAmount%this.heightBar
-            const threshold = 40
-            const minLimit = threshold
-            const maxLimit = this.heightBar - threshold
-            if (perAmount < minLimit || perAmount > maxLimit) {
-                if (this.scrollFlg === 0) {
-                    if (this.direction === 0) {
-                        this.mt += this.heightBar;
-                        this.customStyle = {
-                            marginTop: this.mt + 'px',
-                        }
-                    } else {
-                        this.mt -= this.heightBar;
-                        this.customStyle = {
-                            marginTop: this.mt + 'px',
-                        }
-                    }
-                }
-                this.scrollFlg = 1
-            } else if (perAmount >= minLimit || perAmount <= maxLimit) {
-                this.scrollFlg = 0
+
+    @Watch('scrollY', { immediate: true, deep: true })
+    getScrollY (val: string) {
+      const scrollAmount = Math.abs(parseInt(val))
+      const perAmount = scrollAmount % this.heightBar
+      const threshold = 30
+      const minLimit = threshold
+      const maxLimit = this.heightBar - threshold
+      if (perAmount < minLimit || perAmount > maxLimit) {
+        if (this.scrollFlg === 0) {
+          if (this.direction === 0) {
+            this.mt += this.heightBar
+            this.customStyle = {
+              marginTop: this.mt + 'px'
             }
+          } else {
+            this.mt -= this.heightBar
+            this.customStyle = {
+              marginTop: this.mt + 'px'
+            }
+          }
         }
-  }
-})
+        this.scrollFlg = 1
+      } else if (perAmount >= minLimit || perAmount <= maxLimit) {
+        this.scrollFlg = 0
+      }
+    }
+}
 </script>
 <style lang="sass" scoped>
 .container

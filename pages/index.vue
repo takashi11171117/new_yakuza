@@ -1,51 +1,44 @@
 <template>
-    <div class="menu box" @wheel="zoom" >
-        <div class="aaaa">
-            <SlideMenu :scrollY="scrollY" :direction="direction" />
-        </div>
+  <div class="menu box" @wheel="zoom">
+    <div class="aaaa">
+      <SlideMenu :scroll-y="scrollY" :direction="direction" />
     </div>
+  </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import {TweenMax, Expo, Elastic} from 'gsap'
-import SlideMenu from '../components/SlideMenu'
-import _ from 'lodash'
+import { Component, Vue } from 'vue-property-decorator'
+import SlideMenu from '@/components/SlideMenu.vue'
 
-export default Vue.extend({
-    data() {
-        return {
-            scrollY: 0,
-            direction: 0
-        }
-    }, 
-    components: {
-      SlideMenu,
-    },
-    mounted () {
-    },
-    methods: {
-        zoom (e) {
-                if (e.deltaY > 0) {
-                    this.direction = 1;
-                } else {
-                    this.direction = 0;
-                }
-
-                let delta = 0;
-
-                if (e.deltaY > 60) {
-                    delta = 60;
-                } else if (e.deltaY < -60) {
-                    delta = -60;
-                } else {
-                    delta = e.deltaY;
-                }
-
-                this.scrollY += delta * .9;
-        }
-    }
+@Component({
+  components: {
+    SlideMenu
+  }
 })
+export default class Index extends Vue {
+    public scrollY: number = 0;
+    public direction: number = 0;
+
+    public zoom (e: WheelEvent) {
+      if (e.deltaY > 0) {
+        this.direction = 1
+      } else {
+        this.direction = 0
+      }
+
+      let delta = 0
+
+      if (e.deltaY > 60) {
+        delta = 60
+      } else if (e.deltaY < -60) {
+        delta = -60
+      } else {
+        delta = e.deltaY
+      }
+
+      this.scrollY += delta * 0.9
+    }
+}
 </script>
 
 <style lang="sass" scoped>

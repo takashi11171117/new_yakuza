@@ -10,11 +10,14 @@ const config: Configuration = {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Exo:500,700&display=swap' }
     ]
   },
   loading: { color: '#fff' },
   css: [
+    'normalize.css',
+    '~/assets/style/app.sass',
   ],
   plugins: [
   ],

@@ -1,17 +1,17 @@
 <template>
   <div :style="customStyle">
     <SlideMenuList :direction="direction" :scroll-y="scrollY">
-      <p style="font-size: 90px;">
-        あああああああ
+      <p style="font-size: 120px;">
+        Schedule
       </p>
-      <p style="font-size: 90px;">
-        いいいいいいい
+      <p style="font-size: 120px;">
+        Contact
       </p>
-      <p style="font-size: 90px;">
-        ううううううう
+      <p style="font-size: 120px;">
+        Movie
       </p>
-      <p style="font-size: 90px;">
-        えええ
+      <p style="font-size: 120px;">
+        Sound
       </p>
     </SlideMenuList>
   </div>

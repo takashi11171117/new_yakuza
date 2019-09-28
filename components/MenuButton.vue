@@ -1,5 +1,5 @@
 <template>
-  <div @click="clickMenuButton">
+  <div @click="clicked">
     <svg :viewbox="viewbox" :width="size" :height="size">
       <line
         x1="0"
@@ -29,42 +29,40 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import { TweenLite, Expo } from 'gsap'
 
 @Component({})
 export default class SlideMenu extends Vue {
-  @Prop()
-  public size = 80
+  @Prop({ default: 80 })
+  size!: number
 
-  @Prop()
-  public stroke = 'white'
+  @Prop({ default: 'white' })
+  stroke!: string
 
-  @Prop()
-  public strokeWidth = 2
+  @Prop({ default: 2 })
+  strokeWidth!: number
 
-  @Prop()
-  public speed = 0.4
+  @Prop({ default: 0.4 })
+  speed!: number
 
   private viewbox = `0 0 ${this.size} ${this.size}`
+  private closeFlg = false
+  private halfSize = this.size / 2
+  private halfStrokeWidth = this.strokeWidth / 2
   private topLimit = 0 + this.halfStrokeWidth
   private bottomLimit = this.size - this.halfStrokeWidth
   private line1Y1 = this.topLimit
   private line2X1 = 0
   private line3Y1 = this.bottomLimit
-  private closeFlg = false
 
-  private get halfSize (): number {
-    return this.size / 2
+  @Emit('click-menu-button')
+  clickMenuButton () {
   }
 
-  private get halfStrokeWidth (): number {
-    return this.strokeWidth / 2
-  }
-
-  private clickMenuButton () {
-    this.$emit('clickMenuButton', this.closeFlg)
+  private clicked () {
     this.toggleMenuButton()
+    this.clickMenuButton()
   }
 
   private toggleMenuButton () {

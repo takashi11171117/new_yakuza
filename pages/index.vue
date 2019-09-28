@@ -3,7 +3,7 @@
     <div>
       <MenuButton />
     </div>
-    <div class="menu box" @wheel="zoom">
+    <div class="menu box" @wheel="zoom" @clickMenuButton="clickMenuButton">
       <SlideMenu :scroll-y="scrollY" :direction="direction" />
     </div>
   </div>
@@ -24,7 +24,12 @@ export default class Index extends Vue {
     public scrollY: number = 0;
     public direction: number = 0;
 
-    public zoom (e: WheelEvent) {
+    private clickMenuButton (e: object) {
+      // eslint-disable-next-line no-console
+      console.log(e)
+    }
+
+    private zoom (e: WheelEvent) {
       if (e.deltaY > 0) {
         this.direction = 1
       } else {

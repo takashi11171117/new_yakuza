@@ -1,4 +1,4 @@
-import Vue from "vue";
+import Vue from 'vue'
 
 Vue.mixin({
   data: () => {
@@ -7,10 +7,11 @@ Vue.mixin({
   },
   methods: {
     $console: (...args) => {
-      console.dir(args);
+      // eslint-disable-next-line no-console
+      console.dir(args)
     },
     $isset: (data) => {
-      return !(data === "" || data === null || data === undefined);
+      return !(data === '' || data === null || data === undefined)
     }
-  },
-});
+  }
+})

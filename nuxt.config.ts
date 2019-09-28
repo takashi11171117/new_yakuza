@@ -17,7 +17,7 @@ const config: Configuration = {
   loading: { color: '#fff' },
   css: [
     'normalize.css',
-    '~/assets/style/app.sass',
+    '~/assets/style/app.sass'
   ],
   plugins: [
   ],

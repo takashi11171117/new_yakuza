@@ -1,6 +1,9 @@
 <template>
-  <div class="menu box" @wheel="zoom">
-    <div class="aaaa">
+  <div>
+    <div>
+      <MenuButton />
+    </div>
+    <div class="menu box" @wheel="zoom">
       <SlideMenu :scroll-y="scrollY" :direction="direction" />
     </div>
   </div>
@@ -9,10 +12,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import SlideMenu from '@/components/SlideMenu.vue'
+import MenuButton from '@/components/MenuButton.vue'
 
 @Component({
   components: {
-    SlideMenu
+    SlideMenu,
+    MenuButton
   }
 })
 export default class Index extends Vue {

@@ -1,6 +1,6 @@
 <template>
   <div :style="customStyle" class="menu">
-    <SlideMenuList :direction="direction" :scroll-y="scrollY">
+    <SlideMenuList>
       <p class="menu-item">
         Schedule
       </p>
@@ -17,8 +17,9 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import SlideMenuList from '@/components/SlideMenuList.vue'
+import { UIStore } from '~/store'
 
 @Component({
   components: {
@@ -26,21 +27,29 @@ import SlideMenuList from '@/components/SlideMenuList.vue'
   }
 })
 export default class SlideMenu extends Vue {
-    @Prop()
-    public scrollY = 0
+  get menuScrollY (): number {
+    return UIStore.getMenuScrollY
+  }
 
-    @Prop()
-    public direction = 0
+  get menuDirection (): number {
+    return UIStore.getMenuDirection
+  }
 
     private customStyle: Object = {
-      transform: `translateY(${this.scrollY}px)`
+      transform: `translateY(${this.menuScrollY}px)`
     }
 
-    @Watch('scrollY', { immediate: true, deep: true })
-    getScrollY (val: number) {
+    @Watch('menuScrollY', { immediate: true, deep: true })
+    getMenuScrollY (val: number) {
       this.customStyle = {
         transform: `translateY(${val}px)`
       }
+    }
+
+    beforeDestroy () {
+      /* eslint import/no-mutable-exports: 0 */
+      console.log('a')
+      UIStore.resetMenuPos()
     }
 }
 </script>

@@ -19,22 +19,25 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import { UIStore } from '~/store'
 
 @Component({})
 export default class SlideMenuList extends Vue {
-    @Prop({ default: 0 })
-    direction!: number
-
-    @Prop({ default: 0 })
-    scrollY!: number
-
     private customStyle: Object = {
       marginTop: 0
     }
     private scrollFlg = 0
     private heightBar = 0
     private mt = 0
+
+    get menuScrollY (): number {
+      return UIStore.getMenuScrollY
+    }
+
+    get menuDirection (): number {
+      return UIStore.getMenuDirection
+    }
 
     mounted () {
       this.matchHeight()
@@ -51,8 +54,8 @@ export default class SlideMenuList extends Vue {
       }
     }
 
-    @Watch('scrollY', { immediate: true, deep: true })
-    getScrollY (val: string) {
+    @Watch('menuScrollY', { immediate: true, deep: true })
+    getMenuScrollY (val: string) {
       const scrollAmount = Math.abs(parseInt(val))
       const perAmount = scrollAmount % this.heightBar
       const threshold = 30
@@ -60,7 +63,7 @@ export default class SlideMenuList extends Vue {
       const maxLimit = this.heightBar - threshold
       if (perAmount < minLimit || perAmount > maxLimit) {
         if (this.scrollFlg === 0) {
-          if (this.direction === 0) {
+          if (this.menuDirection === 0) {
             this.mt += this.heightBar
             this.customStyle = {
               marginTop: this.mt + 'px'
@@ -83,4 +86,5 @@ export default class SlideMenuList extends Vue {
 .container
     position: absolute
     top: 50%
+    right: 20px
 </style>

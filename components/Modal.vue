@@ -1,9 +1,11 @@
 <template>
-  <div v-if="menuCloseFlg" class="modal">
-    <div @wheel="zoom">
-      <SlideMenu :scroll-y="scrollY" :direction="direction" />
+  <transition name="modal">
+    <div v-if="menuCloseFlg" class="modal">
+      <div @wheel="zoom">
+        <SlideMenu />
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
@@ -16,32 +18,29 @@ import { UIStore } from '~/store'
   }
 })
 export default class Modal extends Vue {
-    public scrollY: number = 0;
-    public direction: number = 0;
+  get menuCloseFlg (): boolean {
+    return UIStore.getMenuCloseFlg
+  }
 
-    get menuCloseFlg (): boolean {
-      return UIStore.getMenuCloseFlg
+  private zoom (e: WheelEvent) {
+    if (e.deltaY > 0) {
+      UIStore.updateMenuDirection(1)
+    } else {
+      UIStore.updateMenuDirection(0)
     }
 
-    private zoom (e: WheelEvent) {
-      if (e.deltaY > 0) {
-        this.direction = 1
-      } else {
-        this.direction = 0
-      }
+    let delta = 0
 
-      let delta = 0
-
-      if (e.deltaY > 60) {
-        delta = 60
-      } else if (e.deltaY < -60) {
-        delta = -60
-      } else {
-        delta = e.deltaY
-      }
-
-      this.scrollY += delta * 0.9
+    if (e.deltaY > 60) {
+      delta = 60
+    } else if (e.deltaY < -60) {
+      delta = -60
+    } else {
+      delta = e.deltaY
     }
+
+    UIStore.updateMenuScrollY(delta)
+  }
 }
 </script>
 
@@ -52,4 +51,10 @@ export default class Modal extends Vue {
         height: 100vh
         position: fixed
         top: 0
+
+    .modal-enter-active, .modal-leave-active
+        transition: all 700ms
+
+    .modal-enter, .modal-leave-active
+        opacity: 0
 </style>

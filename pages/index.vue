@@ -1,8 +1,8 @@
 <template>
   <div class="box">
     <Header />
-    <div class="" @clickMenuButton="clickMenuButton">
-      <Modal />
+    <div class="">
+      <Modal class="" />
     </div>
   </div>
 </template>
@@ -19,10 +19,6 @@ import Header from '@/components/Header.vue'
   }
 })
 export default class Index extends Vue {
-  private clickMenuButton (e: object) {
-    // eslint-disable-next-line no-console
-    console.log(e)
-  }
 }
 </script>
 

@@ -29,7 +29,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 import { TweenLite, Expo } from 'gsap'
 import { UIStore } from '~/store'
 
@@ -47,7 +47,6 @@ export default class SlideMenu extends Vue {
   @Prop({ default: 0.4 })
   speed!: number
 
-  private viewbox = `0 0 ${this.size} ${this.size}`
   private halfSize = this.size / 2
   private halfStrokeWidth = this.strokeWidth / 2
   private topLimit = 0 + this.halfStrokeWidth
@@ -56,17 +55,16 @@ export default class SlideMenu extends Vue {
   private line2X1 = 0
   private line3Y1 = this.bottomLimit
 
+  get viewbox (): string {
+    return `0 0 ${this.size} ${this.size}`
+  }
+
   get menuCloseFlg (): boolean {
     return UIStore.getMenuCloseFlg
   }
 
-  @Emit('click-menu-button')
-  clickMenuButton () {
-  }
-
   private clicked () {
     this.toggleMenuButton()
-    this.clickMenuButton()
   }
 
   private toggleMenuButton () {

@@ -23,11 +23,11 @@ import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 
 @Component({})
 export default class SlideMenuList extends Vue {
-    @Prop()
-    direction = 0;
+    @Prop({ default: 0 })
+    direction!: number
 
-    @Prop()
-    scrollY = 0;
+    @Prop({ default: 0 })
+    scrollY!: number
 
     private customStyle: Object = {
       marginTop: 0

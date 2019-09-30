@@ -1,60 +1,32 @@
 <template>
-  <div>
-    <div>
-      <MenuButton />
-    </div>
-    <div class="menu box" @wheel="zoom" @clickMenuButton="clickMenuButton">
-      <SlideMenu :scroll-y="scrollY" :direction="direction" />
+  <div class="box">
+    <Header />
+    <div class="" @clickMenuButton="clickMenuButton">
+      <Modal />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import SlideMenu from '@/components/SlideMenu.vue'
-import MenuButton from '@/components/MenuButton.vue'
+import Modal from '@/components/Modal.vue'
+import Header from '@/components/Header.vue'
 
 @Component({
   components: {
-    SlideMenu,
-    MenuButton
+    Modal,
+    Header
   }
 })
 export default class Index extends Vue {
-    public scrollY: number = 0;
-    public direction: number = 0;
-
-    private clickMenuButton (e: object) {
-      // eslint-disable-next-line no-console
-      console.log(e)
-    }
-
-    private zoom (e: WheelEvent) {
-      if (e.deltaY > 0) {
-        this.direction = 1
-      } else {
-        this.direction = 0
-      }
-
-      let delta = 0
-
-      if (e.deltaY > 60) {
-        delta = 60
-      } else if (e.deltaY < -60) {
-        delta = -60
-      } else {
-        delta = e.deltaY
-      }
-
-      this.scrollY += delta * 0.9
-    }
+  private clickMenuButton (e: object) {
+    // eslint-disable-next-line no-console
+    console.log(e)
+  }
 }
 </script>
 
 <style lang="sass" scoped>
-    .menu-item
-        font-size: 100px
-
     .box
         width: 100vw
         height: 100vh

@@ -1,5 +1,5 @@
 <template>
-  <div @click="clicked">
+  <div class="button" @click="clicked">
     <svg :viewbox="viewbox" :width="size" :height="size">
       <line
         x1="0"
@@ -31,6 +31,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import { TweenLite, Expo } from 'gsap'
+import { UIStore } from '~/store'
 
 @Component({})
 export default class SlideMenu extends Vue {
@@ -47,7 +48,6 @@ export default class SlideMenu extends Vue {
   speed!: number
 
   private viewbox = `0 0 ${this.size} ${this.size}`
-  private closeFlg = false
   private halfSize = this.size / 2
   private halfStrokeWidth = this.strokeWidth / 2
   private topLimit = 0 + this.halfStrokeWidth
@@ -55,6 +55,10 @@ export default class SlideMenu extends Vue {
   private line1Y1 = this.topLimit
   private line2X1 = 0
   private line3Y1 = this.bottomLimit
+
+  get menuCloseFlg (): boolean {
+    return UIStore.getMenuCloseFlg
+  }
 
   @Emit('click-menu-button')
   clickMenuButton () {
@@ -66,9 +70,7 @@ export default class SlideMenu extends Vue {
   }
 
   private toggleMenuButton () {
-    // eslint-disable-next-line no-console
-    console.log(this.$data)
-    if (this.closeFlg) {
+    if (this.menuCloseFlg) {
       TweenLite.to(
         this.$data,
         this.speed,
@@ -76,10 +78,10 @@ export default class SlideMenu extends Vue {
           line1Y1: this.topLimit,
           line2X1: 0,
           line3Y1: this.bottomLimit,
-          closeFlg: false,
           ease: Expo.easeIn
         }
       )
+      UIStore.updateMenuCloseFlg(!this.menuCloseFlg)
     } else {
       TweenLite.to(
         this.$data,
@@ -88,11 +90,16 @@ export default class SlideMenu extends Vue {
           line1Y1: this.bottomLimit,
           line2X1: this.size,
           line3Y1: this.topLimit,
-          closeFlg: true,
           ease: Expo.easeIn
         }
       )
+      UIStore.updateMenuCloseFlg(!this.menuCloseFlg)
     }
   }
 }
 </script>
+
+<style lang="sass" scoped>
+    .button
+        display: inline-block
+</style>

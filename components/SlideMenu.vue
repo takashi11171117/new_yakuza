@@ -1,16 +1,16 @@
 <template>
-  <div :style="customStyle">
+  <div :style="customStyle" class="menu">
     <SlideMenuList :direction="direction" :scroll-y="scrollY">
-      <p style="font-size: 120px;">
+      <p class="menu-item">
         Schedule
       </p>
-      <p style="font-size: 120px;">
+      <p class="menu-item">
         Contact
       </p>
-      <p style="font-size: 120px;">
+      <p class="menu-item">
         Movie
       </p>
-      <p style="font-size: 120px;">
+      <p class="menu-item">
         Sound
       </p>
     </SlideMenuList>
@@ -46,4 +46,6 @@ export default class SlideMenu extends Vue {
 </script>
 
 <style scoped lang="sass">
+.menu-item
+    font-size: 9rem
 </style>

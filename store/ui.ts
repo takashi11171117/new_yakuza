@@ -23,7 +23,6 @@ export default class UI extends VuexModule {
 
     @Mutation
     resetMenuPos () {
-      console.log()
       this.menuScrollY = 0
       this.menuDirection = 0
     }

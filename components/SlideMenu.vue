@@ -1,19 +1,6 @@
 <template>
   <div :style="customStyle" class="menu">
-    <SlideMenuList>
-      <p class="menu-item">
-        Schedule
-      </p>
-      <p class="menu-item">
-        Contact
-      </p>
-      <p class="menu-item">
-        Movie
-      </p>
-      <p class="menu-item">
-        Sound
-      </p>
-    </SlideMenuList>
+    <SlideMenuList />
   </div>
 </template>
 <script lang="ts">
@@ -45,16 +32,8 @@ export default class SlideMenu extends Vue {
         transform: `translateY(${val}px)`
       }
     }
-
-    beforeDestroy () {
-      /* eslint import/no-mutable-exports: 0 */
-      console.log('a')
-      UIStore.resetMenuPos()
-    }
 }
 </script>
 
 <style scoped lang="sass">
-.menu-item
-    font-size: 9rem
 </style>

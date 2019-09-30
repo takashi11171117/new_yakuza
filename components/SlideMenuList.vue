@@ -1,25 +1,43 @@
 <template>
-  <div ref="container" class="container" :style="customStyle">
-    <div ref="bar" class="bar">
-      <slot />
+  <transition
+    appear
+    name="fade"
+    @after-enter="afterEnter"
+    @before-leave="beforeLeave"
+  >
+    <div ref="container" class="container" :style="customStyle">
+      <div ref="bar" class="bar">
+        <p v-for="(menu, index) in menus" ref="menuitem" :key="index" class="menu-item">
+          {{ menu }}
+        </p>
+      </div>
+      <div ref="bar" class="bar">
+        <p v-for="(menu, index) in menus" ref="menuitem" :key="index" class="menu-item">
+          {{ menu }}
+        </p>
+      </div>
+      <div ref="bar" class="bar">
+        <p v-for="(menu, index) in menus" ref="menuitem" :key="index" class="menu-item">
+          {{ menu }}
+        </p>
+      </div>
+      <div ref="bar" class="bar">
+        <p v-for="(menu, index) in menus" ref="menuitem" :key="index" class="menu-item">
+          {{ menu }}
+        </p>
+      </div>
+      <div ref="bar" class="bar">
+        <p v-for="(menu, index) in menus" ref="menuitem" :key="index" class="menu-item">
+          {{ menu }}
+        </p>
+      </div>
     </div>
-    <div ref="bar" class="bar">
-      <slot />
-    </div>
-    <div ref="bar" class="bar">
-      <slot />
-    </div>
-    <div ref="bar" class="bar">
-      <slot />
-    </div>
-    <div ref="bar" class="bar">
-      <slot />
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Expo, TimelineMax } from 'gsap'
 import { UIStore } from '~/store'
 
 @Component({})
@@ -30,6 +48,7 @@ export default class SlideMenuList extends Vue {
     private scrollFlg = 0
     private heightBar = 0
     private mt = 0
+    private menus = ['Schedule', 'Contact', 'Movie', 'Sound']
 
     get menuScrollY (): number {
       return UIStore.getMenuScrollY
@@ -43,7 +62,22 @@ export default class SlideMenuList extends Vue {
       this.matchHeight()
     }
 
-    public matchHeight () {
+    private afterEnter () {
+      this.startMenu()
+    }
+
+    private startMenu () {
+      const menuitem: any = this.$refs.menuitem
+      const timeline = new TimelineMax({ paused: true })
+      let delay = 0.1
+      menuitem.forEach((item: any) => {
+        timeline.fromTo(item, 0.8, { x: 300, alpha: 0 }, { x: 0, alpha: 0.6, ease: Expo.easeOut }, delay)
+        delay += 0.05
+      })
+      timeline.play()
+    }
+
+    private matchHeight () {
       const containerRef: any = this.$refs.container
       const height = containerRef.clientHeight
       const barRef: any = this.$refs.bar
@@ -80,6 +114,26 @@ export default class SlideMenuList extends Vue {
         this.scrollFlg = 0
       }
     }
+
+    private endMenu () {
+      const menuitem: any = this.$refs.menuitem
+      const timeline = new TimelineMax({ paused: true })
+      let delay = 0
+      menuitem.forEach((item: any) => {
+        timeline.fromTo(item, 1, { y: 0, alpha: 0.6 }, { y: -600, alpha: 0.6, ease: Expo.easeOut }, delay)
+        delay += 0.05
+      })
+      timeline.play()
+    }
+
+    private beforeLeave () {
+      this.endMenu()
+    }
+
+    beforeDestroy () {
+      this.endMenu()
+      UIStore.resetMenuPos()
+    }
 }
 </script>
 <style lang="sass" scoped>
@@ -87,4 +141,6 @@ export default class SlideMenuList extends Vue {
     position: absolute
     top: 50%
     right: 20px
+.menu-item
+    font-size: 9rem
 </style>

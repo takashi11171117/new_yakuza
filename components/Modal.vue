@@ -52,8 +52,11 @@ export default class Modal extends Vue {
         position: fixed
         top: 0
 
-    .modal-enter-active, .modal-leave-active
+    .modal-enter-active
         transition: all 700ms
+
+    .modal-leave-active
+        transition: all 1500ms
 
     .modal-enter, .modal-leave-active
         opacity: 0

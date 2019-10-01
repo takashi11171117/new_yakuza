@@ -8,27 +8,27 @@
     <div ref="container" class="container" :style="customStyle">
       <div ref="bar" class="bar">
         <p v-for="(menu, index) in menus" ref="menuitem" :key="index" class="menu-item">
-          {{ menu }}
+          <n-link to="/">{{ menu }}</n-link>
         </p>
       </div>
       <div ref="bar" class="bar">
         <p v-for="(menu, index) in menus" ref="menuitem" :key="index" class="menu-item">
-          {{ menu }}
+          <n-link to="/">{{ menu }}</n-link>
         </p>
       </div>
       <div ref="bar" class="bar">
         <p v-for="(menu, index) in menus" ref="menuitem" :key="index" class="menu-item">
-          {{ menu }}
+          <n-link to="/">{{ menu }}</n-link>
         </p>
       </div>
       <div ref="bar" class="bar">
         <p v-for="(menu, index) in menus" ref="menuitem" :key="index" class="menu-item">
-          {{ menu }}
+          <n-link to="/">{{ menu }}</n-link>
         </p>
       </div>
       <div ref="bar" class="bar">
         <p v-for="(menu, index) in menus" ref="menuitem" :key="index" class="menu-item">
-          {{ menu }}
+          <n-link to="/">{{ menu }}</n-link>
         </p>
       </div>
     </div>

@@ -11,7 +11,7 @@ const config: Configuration = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Exo:500,700&display=swap' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Palanquin+Dark:500,700&display=swap' }
     ]
   },
   loading: { color: '#fff' },

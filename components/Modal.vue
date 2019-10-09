@@ -46,11 +46,12 @@ export default class Modal extends Vue {
 
 <style lang="sass" scoped>
     .modal
-        background-color: rgba(0, 0, 0, .4);
+        background-color: rgba(0, 0, 0, .65);
         width: 100vw
         height: 100vh
         position: fixed
         top: 0
+        z-index: 9000
 
     .modal-enter-active
         transition: all 700ms

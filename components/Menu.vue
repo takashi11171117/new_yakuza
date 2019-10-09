@@ -1,7 +1,7 @@
 <template>
-  <header id="header">
-    <MenuButton id="menu-button" size="30" stroke-width="2" />
-  </header>
+  <div id="menu">
+    <MenuButton id="menu-button" size="20" stroke-width="2" />
+  </div>
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
@@ -12,16 +12,17 @@ import MenuButton from '@/components/MenuButton.vue'
     MenuButton
   }
 })
-export default class Modal extends Vue {
+export default class Menu extends Vue {
 }
 </script>
 
 <style lang="sass" scoped>
-#header
-    position: relative
+#menu
+    position: fixed
     z-index: 9999
     display: flex
     padding: 20px
+    width: 100%
 #menu-button
     margin-left: auto
 </style>

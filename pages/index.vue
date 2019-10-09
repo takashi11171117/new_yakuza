@@ -1,21 +1,33 @@
 <template>
   <div class="box">
-    <Header />
-    <div class="">
-      <Modal class="" />
-    </div>
+    <Menu />
+    <HeaderBar />
+    <Modal />
+    <main>
+      <Video />
+      <div class="main-logo">
+        <img src="../assets/logo.svg" alt="ニューヤクザ">
+      </div>
+    </main>
+    <Footer />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Modal from '@/components/Modal.vue'
-import Header from '@/components/Header.vue'
+import Menu from '@/components/Menu.vue'
+import HeaderBar from '@/components/HeaderBar.vue'
+import Video from '@/components/Video.vue'
+import Footer from '@/components/Footer.vue'
 
 @Component({
   components: {
     Modal,
-    Header
+    Menu,
+    HeaderBar,
+    Video,
+    Footer
   }
 })
 export default class Index extends Vue {
@@ -28,4 +40,11 @@ export default class Index extends Vue {
         height: 100vh
         position: fixed
         top: 0
+    .main-logo
+        position: fixed
+        z-index: 3000
+        top: calc(50% - 200px)
+        left: calc(50% - 130px)
+        img
+            height: 400px
 </style>

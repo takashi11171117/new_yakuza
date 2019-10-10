@@ -4,6 +4,8 @@
     <HeaderBar />
     <Modal />
     <main>
+      <Mouse />
+      <Tile />
       <Video />
       <div class="main-logo">
         <img src="../assets/logo.svg" alt="ニューヤクザ">
@@ -20,6 +22,8 @@ import Menu from '@/components/Menu.vue'
 import HeaderBar from '@/components/HeaderBar.vue'
 import Video from '@/components/Video.vue'
 import Footer from '@/components/Footer.vue'
+import Tile from '@/components/Tile.vue'
+import Mouse from '@/components/Mouse.vue'
 
 @Component({
   components: {
@@ -27,7 +31,9 @@ import Footer from '@/components/Footer.vue'
     Menu,
     HeaderBar,
     Video,
-    Footer
+    Footer,
+    Tile,
+    Mouse
   }
 })
 export default class Index extends Vue {

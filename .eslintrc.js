@@ -8,5 +8,6 @@ module.exports = {
     'plugin:nuxt/recommended'
   ],
   rules: {
+    "new-cap": [0, {}]
   }
 }

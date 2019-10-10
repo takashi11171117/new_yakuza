@@ -26,7 +26,8 @@
     "types": [
       "@types/node",
       "@nuxt/types",
-      "@types/gsap"
+      "@types/gsap",
+      "@types/p5"
     ]
   },
   "exclude": [

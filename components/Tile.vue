@@ -26,31 +26,27 @@ class Rect {
     public alpha: number
   ) {
     this.p = p
-    this.x = x
-    this.y = y
+    this.pos.translateX = x
+    this.pos.translateY = y
     this.gray = gray
     this.alpha = alpha
   }
 
   tween = (x: number) => {
-    TweenLite.to(this.pos, this.p.random(0.2, 2.3), { translateX: x })
+    TweenLite.to(this.pos, this.p.random(0.2, 2.3), { translateX: this.pos.translateX + x })
   }
 
   draw = () => {
     this.p.push()
     this.p.fill(this.gray, this.alpha)
+    this.p.rectMode(this.p.CENTER)
+    this.p.translate(this.pos.translateX, this.pos.translateY)
     this.p.rotateY(this.pos.rotateX)
     this.p.rotateX(this.pos.rotateY)
     this.p.noStroke()
-    this.p.translate(this.pos.translateX, 0)
-    this.p.rect(this.x, this.y, 50, 50)
+    this.p.rect(0, 0, 50, 50)
     this.p.pop()
   }
-}
-
-type Trans = {
-    translateX: number,
-    translateY: number
 }
 
 @Component({})
@@ -63,8 +59,8 @@ export default class Tile extends Vue {
         const width = p.windowWidth > 750 ? 750 : p.windowWidth
         const tilesNumberWidth = even(Math.floor(width * 0.95 / 50))
         const tilesNumberHeight = even(Math.floor(p.windowHeight * 0.95 / 50))
-        const startWidth = -(50 * tilesNumberWidth / 2)
-        const startHeight = -(50 * tilesNumberHeight / 2)
+        const startWidth = 25 - (50 * tilesNumberWidth / 2)
+        const startHeight = 25 - (50 * tilesNumberHeight / 2)
         for (let i = 0; i < tilesNumberWidth; i++) {
           const x = type !== 'resize' ? startWidth + i * 50 - p.windowWidth : startWidth + i * 50
           for (let n = 0; n < tilesNumberHeight; n++) {
@@ -104,6 +100,14 @@ export default class Tile extends Vue {
         setRect('resize')
         rects.forEach((rect) => {
           rect.draw()
+        })
+      }
+
+      p.mouseMoved = () => {
+        const rotate = p.atan2(p.mouseY - p.windowHeight / 2, p.mouseX - p.windowWidth / 2)
+        rects.forEach((rect) => {
+          rect.pos.rotateX = rotate
+          rect.pos.rotateY = rotate
         })
       }
     }

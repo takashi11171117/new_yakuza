@@ -20,6 +20,7 @@ const config: Configuration = {
     '~/assets/style/app.sass'
   ],
   plugins: [
+    '~/plugins/util'
   ],
   buildModules: [
     '@nuxtjs/eslint-module',

@@ -31,7 +31,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { TweenLite, Expo } from 'gsap'
-import { UIStore } from '~/store'
+import { UIStore } from '@/store'
 
 @Component({})
 export default class SlideMenu extends Vue {

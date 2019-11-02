@@ -14,7 +14,7 @@ const config: Configuration = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Palanquin+Dark:500,700&display=swap' }
     ]
   },
-  loading: { color: '#fff' },
+  loading: '~/components/Loading.vue',
   css: [
     'normalize.css',
     '~/assets/style/app.sass'

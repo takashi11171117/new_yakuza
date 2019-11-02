@@ -112,8 +112,8 @@ export default class Tile extends Vue {
       }
     }
 
+    // eslint-disable-next-line
     const myp5 = new P5(sketch, 'tile-container')
-    console.log(myp5)
   }
 }
 </script>

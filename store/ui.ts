@@ -25,6 +25,7 @@ export default class UI extends VuexModule {
     resetMenuPos () {
       this.menuScrollY = 0
       this.menuDirection = 0
+      this.menuCloseFlg = false
     }
 
     get getMenuCloseFlg (): boolean {

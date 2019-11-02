@@ -25,10 +25,10 @@ export default class Mouse extends Vue {
       }
 
       p.draw = () => {
-        const links = p.selectAll('a')
-        links.forEach((link) => {
-          link.mouseOver(() => console.log('a'))
-        })
+        // const links = p.selectAll('a')
+        // links.forEach((link) => {
+        //   link.mouseOver(() => console.log('a'))
+        // })
         p.clear()
         p.push()
         p.noStroke()
@@ -50,8 +50,8 @@ export default class Mouse extends Vue {
       }
     }
 
+    // eslint-disable-next-line
     const myp5 = new p5(sketch, 'mouse-container')
-    console.log(myp5)
   }
 }
 </script>

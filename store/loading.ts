@@ -2,19 +2,34 @@ import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
 
 @Module({ stateFactory: true, namespaced: true, name: 'loading' })
 export default class UI extends VuexModule {
-    loading: boolean = true
+    loading = true
+    showLoadingComponent = false
+    showMainComponent = false
 
     get isLoading (): boolean {
       return this.loading
     }
 
+    get isShowLoadingComponent (): boolean {
+      return this.showLoadingComponent
+    }
+
+    get isShowMainComponent (): boolean {
+      return this.showMainComponent
+    }
+
     @Mutation
-    setLoding () {
+    endLoading () {
       this.loading = false
     }
 
-    @Action({ rawError: true })
-    endLoding () {
-      this.setLoding()
+    @Mutation
+    switchShowMainComponent () {
+        this.showMainComponent = !this.showMainComponent
+    }
+
+    @Mutation
+    switchShowLoadingComponent () {
+        this.showLoadingComponent = !this.showLoadingComponent
     }
 }
